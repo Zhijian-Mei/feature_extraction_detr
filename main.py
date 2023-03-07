@@ -10,10 +10,9 @@ import requests
 import os
 import numpy as np
 
-url = "http://images.cocodataset.org/val2017/000000039769.jpg"
-image = Image.open(requests.get(url, stream=True).raw)
-print(image)
-quit()
+# url = "http://images.cocodataset.org/val2017/000000039769.jpg"
+# image = Image.open(requests.get(url, stream=True).raw)
+
 
 in_directory = 'amazon_imgs'
 out_directory = 'amazon_imgs_feature'
@@ -29,19 +28,15 @@ for filename in os.listdir(in_directory):
     if os.path.isfile(f):
         id = filename[:len(filename)-4]
         image = Image.open(f)
-        print(image)
-        quit()
         in_img_buffer.append(image)
 
     if len(in_img_buffer) == 10:
-        images = torch.FloatTensor(in_img_buffer)
-        inputs = image_processor(images=images, return_tensors="pt").to(device)
+        inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
+        outputs = model(**inputs)
+        print(outputs.encoder_last_hidden_state)
+        quit()
 
 
-# prepare image for the model
-inputs = image_processor(images=image, return_tensors="pt").to(device)
-outputs = model(**inputs)
-print(outputs.encoder_last_hidden_state)
 
 
 
