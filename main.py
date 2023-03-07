@@ -22,6 +22,8 @@ model = DetrModel.from_pretrained("facebook/detr-resnet-50").to(device)
 
 
 in_img_buffer = []
+in_img_id_butter = []
+out_img_features = {}
 for filename in os.listdir(in_directory):
     f = os.path.join(in_directory, filename)
     # checking if it is a file
@@ -29,11 +31,16 @@ for filename in os.listdir(in_directory):
         id = filename[:len(filename)-4]
         image = Image.open(f)
         in_img_buffer.append(image)
+        in_img_id_butter.append(id)
 
     if len(in_img_buffer) == 5:
         inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
-        outputs = model(**inputs).encoder_last_hidden_state.cpu().numpy()
-        np.save('features.npy',outputs)
+        outputs = model(**inputs).encoder_last_hidden_state.detach()
+        print(outputs)
+        for i in range(outputs.shape[0]):
+            print(outputs[i::].shape)
+            quit()
+        np.save('features.npy',out_img_features)
         # print(outputs.encoder_last_hidden_state)
         # print(outputs.encoder_last_hidden_state.shape)
         quit()
