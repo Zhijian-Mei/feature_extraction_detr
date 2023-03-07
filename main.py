@@ -45,7 +45,9 @@ for filename in os.listdir(in_directory):
             else:
                 print('error')
                 quit()
-
+            print(out_img_features)
+        print(out_img_features)
+        quit()
     np.save('imgs_features.npy',out_img_features)
     datas = np.load('imgs_features.npy',allow_pickle=True)
     print(datas)
