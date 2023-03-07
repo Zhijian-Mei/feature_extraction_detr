@@ -48,7 +48,7 @@ for filename in os.listdir(in_directory):
         # in_img_id_butter.append(id)
 
         try:
-            inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
+            inputs = image_processor(images=image, return_tensors="pt").to(device)
         except:
             continue
         outputs = model(**inputs).encoder_last_hidden_state.detach()
