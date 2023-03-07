@@ -44,10 +44,10 @@ for filename in os.listdir(in_directory):
                 quit()
     print(out_img_features)
     print()
-    np.save('imgs_features.npy',out_img_features)
-    datas = np.load('imgs_features.npy')
-    print(datas)
-    quit()
+    # np.save('imgs_features.npy',out_img_features)
+    # datas = np.load('imgs_features.npy')
+    # print(datas)
+    # quit()
 
 
 
