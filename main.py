@@ -44,36 +44,21 @@ for filename in os.listdir(in_directory):
             continue
         if np.array(image).ndim != 3:
             continue
-        in_img_buffer.append(image)
-        in_img_id_butter.append(id)
+        # in_img_buffer.append(image)
+        # in_img_id_butter.append(id)
 
-    if len(in_img_buffer) == 4:
-        inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
+        try:
+            inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
+        except:
+            continue
         outputs = model(**inputs).encoder_last_hidden_state.detach()
-        for i in range(outputs.shape[0]):
-            if in_img_id_butter[i] not in out_img_features:
-                out_img_features[in_img_id_butter[i]] = outputs[i,:,:].cpu().numpy()
-            else:
-                print('error')
-                quit()
-        for img in in_img_buffer:
-            img.close()
-        in_img_buffer = []
-        in_img_id_butter = []
-
-if len(in_img_buffer) != 0:
-    inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
-    outputs = model(**inputs).encoder_last_hidden_state.detach()
-    for i in range(outputs.shape[0]):
-        if in_img_id_butter[i] not in out_img_features:
-            out_img_features[in_img_id_butter[i]] = outputs[i, :, :].cpu().numpy()
+        if id not in out_img_features:
+            out_img_features[id] = outputs.cpu().numpy()
         else:
             print('error')
             quit()
-    for img in in_img_buffer:
-        img.close()
-    in_img_buffer = []
-    in_img_id_butter = []
+        image.close()
+
 
 np.save('imgs_features.npy',out_img_features)
 
