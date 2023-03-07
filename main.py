@@ -1,7 +1,7 @@
 import torch
 
 
-device=torch.device('cuda:2')
+device=torch.device('cuda:7')
 print(device)
 
 from transformers import AutoImageProcessor, DetrModel
@@ -43,6 +43,8 @@ for filename in os.listdir(in_directory):
             image = Image.open(f)
         except:
             continue
+        print(image.size)
+        quit()
         in_img_buffer.append(image)
         in_img_id_butter.append(id)
 
