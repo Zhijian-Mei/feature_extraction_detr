@@ -39,9 +39,7 @@ for filename in os.listdir(in_directory):
         print(outputs)
         for i in range(outputs.shape[0]):
             if in_img_id_butter[i] not in out_img_features:
-                feature = outputs[i,:,:].numpy()
-                print(feature)
-                out_img_features[in_img_id_butter[i]] = outputs[i,:,:]
+                out_img_features[in_img_id_butter[i]] = outputs[i,:,:].numpy()
                 print(out_img_features)
                 quit()
             else:
