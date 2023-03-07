@@ -16,7 +16,9 @@ for filename in os.listdir(in_directory):
     f = os.path.join(in_directory, filename)
     # checking if it is a file
     if os.path.isfile(f):
+        id = filename[:len(filename)-4]
         print(filename)
+        print(id)
         quit()
 
 
