@@ -38,7 +38,7 @@ for filename in os.listdir(in_directory):
         outputs = model(**inputs).encoder_last_hidden_state.detach()
         print(outputs)
         for i in range(outputs.shape[0]):
-            print(outputs[i::].shape)
+            print(outputs[i,:,:].shape)
             quit()
         np.save('features.npy',out_img_features)
         # print(outputs.encoder_last_hidden_state)
