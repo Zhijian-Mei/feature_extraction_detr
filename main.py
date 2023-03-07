@@ -28,8 +28,11 @@ for filename in os.listdir(in_directory):
     f = os.path.join(in_directory, filename)
     # checking if it is a file
     if os.path.isfile(f):
-        id = filename
-        image = Image.open(f)
+        id = filename[:len(filename)-4]
+        try:
+            image = Image.open(f)
+        except:
+            continue
         in_img_buffer.append(image)
         in_img_id_butter.append(id)
 
