@@ -47,12 +47,12 @@ for filename in os.listdir(in_directory):
             else:
                 print('error')
                 quit()
-    print(out_img_features)
-    print()
-    np.save('imgs_features.npy',out_img_features)
-    datas = np.load('imgs_features.npy')
-    print(datas)
-    quit()
+    # print(out_img_features)
+    # print()
+    # np.save('imgs_features.npy',out_img_features)
+    # datas = np.load('imgs_features.npy')
+    # print(datas)
+    # quit()
 
 
 
