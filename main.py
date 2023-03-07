@@ -33,7 +33,7 @@ counter = 0
 for filename in os.listdir(in_directory):
     counter += 1
     if counter % 100 == 0:
-        print(counter/size)
+        print(f'{(counter/size) * 100} %')
     f = os.path.join(in_directory, filename)
     # checking if it is a file
     if os.path.isfile(f):
