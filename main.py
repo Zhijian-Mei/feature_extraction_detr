@@ -25,13 +25,16 @@ in_img_buffer = []
 in_img_id_butter = []
 out_img_features = {}
 
-print(os.scandir(in_directory))
-quit()
+size = 0
+for ele in os.scandir(in_directory):
+    size += os.path.getsize(ele)
+
+print(size)
 counter = 0
 for filename in os.listdir(in_directory):
     counter += 1
     if counter % 100 == 0:
-        print(counter/11111)
+        print(counter/size)
     f = os.path.join(in_directory, filename)
     # checking if it is a file
     if os.path.isfile(f):
