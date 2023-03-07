@@ -15,7 +15,7 @@ image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50")
 model = DetrModel.from_pretrained("facebook/detr-resnet-50").to(device)
 
 # prepare image for the model
-inputs = image_processor(images=image, return_tensors="pt")
+inputs = image_processor(images=image, return_tensors="pt").to(device)
 outputs = model(**inputs)
 print(outputs.encoder_last_hidden_state)
 
