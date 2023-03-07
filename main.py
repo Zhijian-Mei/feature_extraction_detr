@@ -45,6 +45,11 @@ for filename in os.listdir(in_directory):
             else:
                 print('error')
                 quit()
+        for img in in_img_buffer:
+            img.close()
+        in_img_buffer = []
+        in_img_id_butter = []
+        
 
 np.save('imgs_features.npy',out_img_features)
 
