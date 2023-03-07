@@ -26,8 +26,8 @@ in_img_id_butter = []
 out_img_features = {}
 
 size = 0
-for ele in os.scandir(in_directory):
-    size += os.path.getsize(ele)
+for filename in os.listdir(in_directory):
+    size += 1
 
 counter = 0
 for filename in os.listdir(in_directory):
