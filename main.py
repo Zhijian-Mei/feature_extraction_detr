@@ -43,8 +43,11 @@ for filename in os.listdir(in_directory):
             image = Image.open(f)
         except:
             continue
-        print(image.size)
+        print(np.array(image))
+        print(np.array(image).ndim)
         quit()
+        if np.array(image).ndim != 3:
+            continue
         in_img_buffer.append(image)
         in_img_id_butter.append(id)
 
