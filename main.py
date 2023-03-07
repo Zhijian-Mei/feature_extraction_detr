@@ -29,7 +29,10 @@ for filename in os.listdir(in_directory):
     # checking if it is a file
     if os.path.isfile(f):
         id = filename[:len(filename)-4]
-        image = Image.open(f)
+        try:
+            image = Image.open(f)
+        except:
+            continue
         in_img_buffer.append(image)
         in_img_id_butter.append(id)
 
@@ -42,12 +45,12 @@ for filename in os.listdir(in_directory):
             else:
                 print('error')
                 quit()
-    print(out_img_features)
-    print()
-    # np.save('imgs_features.npy',out_img_features)
-    # datas = np.load('imgs_features.npy')
-    # print(datas)
-    # quit()
+
+    np.save('imgs_features.npy',out_img_features)
+    datas = np.load('imgs_features.npy',allow_pickle=True)
+    print(datas)
+    quit()
+
 
 
 
