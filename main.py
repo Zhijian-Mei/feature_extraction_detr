@@ -32,9 +32,10 @@ for filename in os.listdir(in_directory):
 
     if len(in_img_buffer) == 5:
         inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
-        outputs = model(**inputs)
-        print(outputs.encoder_last_hidden_state)
-        print(outputs.encoder_last_hidden_state.shape)
+        outputs = model(**inputs).encoder_last_hidden_state.cpu().numpy()
+        np.save('features.npy',outputs)
+        # print(outputs.encoder_last_hidden_state)
+        # print(outputs.encoder_last_hidden_state.shape)
         quit()
 
 
