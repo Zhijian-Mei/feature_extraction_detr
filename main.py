@@ -30,7 +30,7 @@ for filename in os.listdir(in_directory):
         image = Image.open(f)
         in_img_buffer.append(image)
 
-    if len(in_img_buffer) == 10:
+    if len(in_img_buffer) == 5:
         inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
         outputs = model(**inputs)
         print(outputs.encoder_last_hidden_state)
