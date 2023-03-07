@@ -18,7 +18,6 @@ model = DetrModel.from_pretrained("facebook/detr-resnet-50")
 
 # prepare image for the model
 inputs = image_processor(images=image, return_tensors="pt")
-print(inputs.shape)
 print(inputs)
 
 
