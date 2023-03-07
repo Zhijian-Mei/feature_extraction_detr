@@ -24,7 +24,14 @@ model = DetrModel.from_pretrained("facebook/detr-resnet-50").to(device)
 in_img_buffer = []
 in_img_id_butter = []
 out_img_features = {}
+
+print(os.scandir(in_directory))
+quit()
+counter = 0
 for filename in os.listdir(in_directory):
+    counter += 1
+    if counter % 100 == 0:
+        print(counter/11111)
     f = os.path.join(in_directory, filename)
     # checking if it is a file
     if os.path.isfile(f):
