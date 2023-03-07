@@ -38,12 +38,14 @@ for filename in os.listdir(in_directory):
         outputs = model(**inputs).encoder_last_hidden_state.detach()
         print(outputs)
         for i in range(outputs.shape[0]):
-            print(outputs[i,:,:].shape)
-            quit()
-        np.save('features.npy',out_img_features)
-        # print(outputs.encoder_last_hidden_state)
-        # print(outputs.encoder_last_hidden_state.shape)
-        quit()
+            if in_img_id_butter[i] not in out_img_features:
+                out_img_features[in_img_id_butter[i]] = outputs[i,:,:]
+            else:
+                print('error')
+                quit()
+    np.save('imgs_features.npy',out_img_features)
+    quit()
+
 
 
 
