@@ -7,11 +7,11 @@ print(device)
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 image = Image.open(requests.get(url, stream=True).raw)
 
-image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50",device=device)
+image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50").to(device)
 model = DetrModel.from_pretrained("facebook/detr-resnet-50")
 
 inputs = image_processor(images=image, return_tensors="pt")
-print(input())
+print(input)
 outputs = model(inputs,return_dict=True)
 print(outputs)
 
