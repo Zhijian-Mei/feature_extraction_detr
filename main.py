@@ -12,11 +12,11 @@ url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 image = Image.open(requests.get(url, stream=True).raw)
 
 image_processor = AutoImageProcessor.from_pretrained("facebook/detr-resnet-50")
-model = DetrModel.from_pretrained("facebook/detr-resnet-50")
+model = DetrModel.from_pretrained("facebook/detr-resnet-50").get_encoder().to(device)
 
 # prepare image for the model
 inputs = image_processor(images=image, return_tensors="pt")
 outputs = model(**inputs)
-print(outputs)
+print(outputs.encoder_last_hidden_state)
 
 
