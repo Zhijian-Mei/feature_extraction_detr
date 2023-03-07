@@ -36,7 +36,7 @@ for filename in os.listdir(in_directory):
         in_img_buffer.append(image)
         in_img_id_butter.append(id)
 
-    if len(in_img_buffer) == 5:
+    if len(in_img_buffer) == 4:
         inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
         outputs = model(**inputs).encoder_last_hidden_state.detach()
         for i in range(outputs.shape[0]):
@@ -49,7 +49,20 @@ for filename in os.listdir(in_directory):
             img.close()
         in_img_buffer = []
         in_img_id_butter = []
-        
+
+if len(in_img_buffer) != 0:
+    inputs = image_processor(images=in_img_buffer, return_tensors="pt").to(device)
+    outputs = model(**inputs).encoder_last_hidden_state.detach()
+    for i in range(outputs.shape[0]):
+        if in_img_id_butter[i] not in out_img_features:
+            out_img_features[in_img_id_butter[i]] = outputs[i, :, :].cpu().numpy()
+        else:
+            print('error')
+            quit()
+    for img in in_img_buffer:
+        img.close()
+    in_img_buffer = []
+    in_img_id_butter = []
 
 np.save('imgs_features.npy',out_img_features)
 
