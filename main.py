@@ -29,7 +29,6 @@ size = 0
 for ele in os.scandir(in_directory):
     size += os.path.getsize(ele)
 
-print(size)
 counter = 0
 for filename in os.listdir(in_directory):
     counter += 1
@@ -43,9 +42,6 @@ for filename in os.listdir(in_directory):
             image = Image.open(f)
         except:
             continue
-        print(np.array(image))
-        print(np.array(image).ndim)
-        quit()
         if np.array(image).ndim != 3:
             continue
         in_img_buffer.append(image)
