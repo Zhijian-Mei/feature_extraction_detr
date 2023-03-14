@@ -52,7 +52,7 @@ for filename in os.listdir(in_directory):
         except:
             continue
         # outputs = model(**inputs).encoder_last_hidden_state.detach()
-        outputs = model(**inputs).decoder_last_hidden_state.detach()
+        outputs = model(**inputs).last_hidden_state.detach()
         if id not in out_img_features:
             out_img_features[id] = outputs.cpu().numpy()
             print(outputs.shape)
