@@ -55,8 +55,6 @@ for filename in os.listdir(in_directory):
         outputs = model(**inputs).last_hidden_state.detach()
         if id not in out_img_features:
             out_img_features[id] = outputs.cpu().numpy()
-            print(outputs.shape)
-            quit()
         else:
             print('error')
             quit()
